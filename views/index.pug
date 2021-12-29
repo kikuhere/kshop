@@ -1,29 +1,11 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title K Shop
-        link(rel="stylesheet", href="css/style.css")
-    body 
-        .section
-            .container.is-max-desktop
-                h1.title Home Page
-                p.subtitle This is the Home page of our App.
+extends layouts/main_layout.pug
 
-                a(href="/store").button Go to Store
-            
-            //- Add Product page
-            .container.mt-5.is-max-desktop
-                .columns 
-                    .column.is-three-fifths
-                        .card
-                            .card-content
-                                form(action="/addproduct", method="post").form
-                                    .field
-                                        label.label Product Name
-                                            .control
-                                                input(type="text" placeholder="enter Product Name" name="title").input 
-                                            .control
-                                                button(type="submit").button Add Product
+block content
+    .section
+        .container.is-max-desktop
+            h1.title K-SHOP Home
+            p.subtitle This is the Home page of our App.
+
+            a(href="/store").button Go to Store
+        
+        

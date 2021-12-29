@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title K Shop
+        link(rel="stylesheet", href="css/style.css")
+    body 
+        .container.is-max-desktop
+            nav.navbar.is-dark(role="navigation" aria-label="main navigation")
+                div.navbar-brand
+                    a.navbar-item(href="/")
+                        h1.title.is-4.has-text-white K-SHOP
+
+                div.navbar-menu(id="navbarBasicExample")
+                    div.navbar-start
+                        a.navbar-item(href="/") Home
+                        a.navbar-item(href="/store") Store
+                    div.navbar-end
+                        a.navbar-item(href="/addproduct") Add Product
+
+        block content

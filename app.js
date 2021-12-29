@@ -22,6 +22,10 @@ app.post("/addproduct", (req, res, next) => {
   res.redirect("/store");
 });
 
+app.get("/addproduct", (req, res, next) => {
+  res.render("add_product");
+});
+
 app.listen(3000, () => {
   console.log("server started at 3000");
 });
