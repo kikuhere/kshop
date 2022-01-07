@@ -19,7 +19,7 @@ app.get("/store", (req, res, next) => {
 
 app.post("/addproduct", (req, res, next) => {
   if (req.body.title !== "") {
-    products.unshift(req.body.title);
+    products.unshift({ title: req.body.title });
   }
   res.redirect("/store");
 });
