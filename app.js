@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const pug = require("pug");
+const ejs = require("ejs");
 const path = require("path");
 
-app.set("view engine", "pug");
+app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -18,7 +18,9 @@ app.get("/store", (req, res, next) => {
 });
 
 app.post("/addproduct", (req, res, next) => {
-  products.unshift(req.body.title);
+  if (req.body.title !== "") {
+    products.unshift(req.body.title);
+  }
   res.redirect("/store");
 });
 

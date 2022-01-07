@@ -1,0 +1,24 @@
+<%- include("includes/main.ejs") %>
+<div class="container mt-5 is-max-desktop">
+    <div class="columns">
+        <div class="column is-three-fifths">
+            <div class="card">
+                <div class="card-content">
+                    <form class="form" action="/addproduct" method="post">
+                        <div class="field">
+                            <label for="" class="label">
+                                Product Name
+                            </label>
+                            <div class="control">
+                                <input class="input" type="text" name="title" placeholder="enter Product Name">
+                            </div>
+                            <div class="control">
+                                <button class="button" type="submit">Add Product</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

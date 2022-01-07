@@ -1,0 +1,37 @@
+<%- include("includes/main.ejs") %>
+<div class="section">
+    <div class="container is-max-desktop">
+        <h1 class="title has-text-info">Store Page</h1>
+        <p class="subtitle">Here, We can find all products in our store.</p>
+        <a href="/" class="button:href">Go to Home</a>
+    </div>
+
+    <% if(allProducts.length > 0) { %>
+    <div class="container mt-5 is-max-desktop">
+        <h1 class="title">All Products</h1>
+        <div class="columns is-multiline">
+            <% allProducts.forEach(product => { %>
+            <div class="column is-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://api.time.com/wp-content/uploads/2015/06/521811839-copy.jpg" alt="">
+                    </div>
+                    <div class="card-content">
+                        <h1 class="title is-4"><%= product %></h1>
+                        <p class="subtitle is-6">Product description</p>
+                    </div>
+                    <div class="card-footer">
+                        <h1 class="card-footer-item is-4">Rs.255/-</h1>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    <% } else {%>
+    <div class="container is-max-desktop">
+        <h1 class="title">No Products found. Try adding one</h1>
+        <a href="/addproduct" class="button:href">Add Product</a>
+    </div>
+    <% } %>
+</div>

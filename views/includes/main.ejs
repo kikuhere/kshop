@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title><%= pageTitle %></title>
+</head>
+
+<body>
+    <div class="container is-max-desktop">
+        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                    <h1 class="title is-4 has-text-white">K-SHOP</h1>
+                </a>
+            </div>
+            <div class="navbar-menu" id="navbarBasicExample">
+                <div class="navbar-start">
+                    <a href="/"
+                        class="navbar-item <%= pageTitle === 'K-Shop | Your Shopping Destination' && 'active' %>">Home</a>
+                    <a href="/store" class="navbar-item <%= pageTitle === 'K-Shop | Store' && 'active' %> ">Store</a>
+                </div>
+                <div class="navbar-end">
+                    <a href="/addproduct"
+                        class="navbar-item <%= pageTitle === 'K-Shop | Add a Product' && 'active' %>">Add
+                        Product</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</body>
+
+</html>
