@@ -2,35 +2,26 @@ const express = require("express");
 const app = express();
 const ejs = require("ejs");
 const path = require("path");
+const adminRoutes = require("./routes/admin.js");
+const shopRoutes = require("./routes/shop.js");
+const pageNotFound = require("./controllers/404");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-const products = [];
-
 app.get("/", (req, res, next) => {
   res.render("index", { pageTitle: "K-Shop | Your Shopping Destination" });
 });
 
-app.get("/store", (req, res, next) => {
-  res.render("store", { allProducts: products, pageTitle: "K-Shop | Store" });
-});
+// getting all admin related routes
+app.use(adminRoutes);
 
-app.post("/addproduct", (req, res, next) => {
-  if (req.body.title !== "") {
-    products.unshift({ title: req.body.title });
-  }
-  res.redirect("/store");
-});
+// getting all shop related routes
+app.use(shopRoutes);
 
-app.get("/addproduct", (req, res, next) => {
-  res.render("add_product", { pageTitle: "K-Shop | Add a Product" });
-});
-
-app.use((req, res, next) => {
-  res.render("404", { pageTitle: "Oh.. Noo <br> You are Lost somewhere" });
-});
+// getting 404 route from controller
+app.use(pageNotFound.get404);
 
 app.listen(3000, () => {
   console.log("server started at 3000");
