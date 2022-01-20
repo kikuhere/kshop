@@ -13,9 +13,10 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  const products = Product.fetchAll();
-  res.render("store", {
-    allProducts: products,
-    pageTitle: "K-Shop | Store",
+  const products = Product.fetchAll((products) => {
+    res.render("store", {
+      allProducts: products,
+      pageTitle: "K-Shop | Store",
+    });
   });
 };
