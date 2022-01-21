@@ -11,11 +11,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res, next) => {
-  res.render("index", { pageTitle: "K-Shop | Your Shopping Destination" });
+  res.render("shop/index", { pageTitle: "K-Shop | Your Shopping Destination" });
 });
 
 // getting all admin related routes
-app.use(adminRoutes);
+app.use("/admin", adminRoutes);
 
 // getting all shop related routes
 app.use(shopRoutes);

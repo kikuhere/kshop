@@ -6,4 +6,10 @@ const productController = require("../controllers/products");
 
 router.get("/store", productController.getProducts);
 
+router.get("/cart", productController.getCart);
+
+router.get("/product-details", productController.getProductDetails);
+
+router.get("/checkout", productController.getCheckout);
+
 module.exports = router;

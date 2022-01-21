@@ -19,12 +19,18 @@
             </div>
             <div class="navbar-menu" id="navbarBasicExample">
                 <div class="navbar-start">
+                    <!-- Home -->
                     <a href="/"
                         class="navbar-item <%= pageTitle === 'K-Shop | Your Shopping Destination' && 'active' %>">Home</a>
+                    <!-- Store -->
                     <a href="/store" class="navbar-item <%= pageTitle === 'K-Shop | Store' && 'active' %> ">Store</a>
+                    <!-- Cart -->
+                    <a href="/cart" class="navbar-item <%= pageTitle === 'K-Shop | Cart' && 'active' %> ">Cart</a>
                 </div>
+
                 <div class="navbar-end">
-                    <a href="/addproduct"
+                    <!-- Add Product -->
+                    <a href="admin/addproduct"
                         class="navbar-item <%= pageTitle === 'K-Shop | Add a Product' && 'active' %>">Add
                         Product</a>
                 </div>
