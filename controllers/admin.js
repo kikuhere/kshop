@@ -1,8 +1,17 @@
 const Product = require("../models/product");
 
 exports.postAddProduct = (req, res, next) => {
-  if (req.body.title !== "") {
-    const product = new Product(req.body.title);
+  const title = req.body.title;
+  const imageUrl = req.body.imageUrl;
+  const price = req.body.price;
+  const description = req.body.description;
+  if (
+    (title !== "") &
+    (imageUrl !== "") &
+    (price !== "") &
+    (description !== "")
+  ) {
+    const product = new Product(title, imageUrl, price, description);
     product.save();
   }
   res.redirect("/store");

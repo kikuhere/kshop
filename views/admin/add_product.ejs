@@ -4,18 +4,43 @@
         <div class="column is-three-fifths">
             <div class="card">
                 <div class="card-content">
-                    <form class="form" action="/addproduct" method="post">
+                    <form class="form" action="/admin/addproduct" method="post">
+
                         <div class="field">
-                            <label for="" class="label">
-                                Product Name
-                            </label>
+                            <label for="" class="label"> Product Name </label>
                             <div class="control">
                                 <input class="input" type="text" name="title" placeholder="enter Product Name">
                             </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="imageUrl" class="label"> Image URL </label>
                             <div class="control">
-                                <button class="button" type="submit">Add Product</button>
+                                <input class="input" type="text" name="imageUrl" placeholder="enter image URL">
                             </div>
                         </div>
+
+                        <div class="field">
+                            <label for="price" class="label"> Price </label>
+                            <div class="control">
+                                <input class="input" type="number" step="0.01" name="price" placeholder="enter Price">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="description" class="label"> Description </label>
+                            <div class="control">
+                                <textarea class="textarea" type="text" name="description"
+                                    placeholder="enter Description" cols="5" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-link" type="submit">Add Product</button>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

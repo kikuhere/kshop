@@ -19,8 +19,11 @@ const getProductsFromFile = (cb) => {
 
 // Creating and Exporting Product model
 module.exports = class Product {
-  constructor(productTitle) {
-    this.title = productTitle;
+  constructor(title, imageUrl, price, description) {
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.price = price;
+    this.description = description;
   }
 
   // Saving product model to a file
