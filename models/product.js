@@ -28,6 +28,7 @@ module.exports = class Product {
 
   // Saving product model to a file
   save() {
+    this.id = Math.random().toString();
     getProductsFromFile((products) => {
       products.unshift(this);
       fs.writeFile(filePath, JSON.stringify(products), (err) => {
@@ -39,5 +40,13 @@ module.exports = class Product {
   // Getting all products in the database
   static fetchAll(cb) {
     getProductsFromFile(cb);
+  }
+
+  // Get a Single product
+  static getById(id, cb) {
+    getProductsFromFile((products) => {
+      const product = products.find((p) => p.id === id);
+      cb(product);
+    });
   }
 };

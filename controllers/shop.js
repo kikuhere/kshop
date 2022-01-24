@@ -18,11 +18,18 @@ exports.getCart = (req, res, next) => {
 exports.getProductDetails = (req, res, next) => {
   res.render("shop/product-details", {
     pageTitle: "K-Shop | Product Details",
+    productId: req.params.productId,
   });
 };
 
 exports.getCheckout = (req, res, next) => {
   res.render("shop/checkout", {
     pageTitle: "K-Shop | Checkout",
+  });
+};
+
+exports.getOrders = (req, res, next) => {
+  res.render("shop/orders", {
+    pageTitle: "K-Shop | Orders",
   });
 };

@@ -13,14 +13,18 @@
             <div class="column is-3">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://api.time.com/wp-content/uploads/2015/06/521811839-copy.jpg" alt="">
+                        <img src="<%= product.imageUrl %>" alt="">
                     </div>
                     <div class="card-content">
                         <h1 class="title is-4"><%= product.title %></h1>
-                        <p class="subtitle is-6">Product description</p>
+                        <p class="subtitle is-6"><%= product.description %></p>
+                        <h2 class="title is-4 has-text-info">₹ <%= product.price %></h2>
                     </div>
                     <div class="card-footer">
-                        <h1 class="card-footer-item is-4">Rs.255/-</h1>
+                        <a href="/edit-product/" class="card-footer-item">Edit</a>
+                        <form action="/admin/delete-product/" method="POST" class="form">
+                            <button type="submit" class="card-footer-item button is-white">Delete</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -30,7 +34,7 @@
     <% } else {%>
     <div class="container is-max-desktop">
         <h1 class="title">No Products found. Try adding one</h1>
-        <a href="/addproduct" class="button:href">Add Product</a>
+        <a href="/admin/addproduct" class="button:href">Add Product</a>
     </div>
     <% } %>
 </div>
