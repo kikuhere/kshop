@@ -1,3 +1,12 @@
 <%- include("../includes/main.ejs") %>
-
-<h1>Product Details : <%= productId %></h1>
+<div class="container mt-5 is-max-desktop">
+    <div class="box">
+        <h1 class="title"><%= product.title %></h1>
+        <figure class="image">
+            <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+        </figure>
+        <h1 class=" title is-info">₹ <%= product.price %></h1>
+        <p><%= product.description %></p>
+        <button class="button is-info">Add to Cart</button>
+    </div>
+</div>

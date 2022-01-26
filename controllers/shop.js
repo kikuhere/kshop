@@ -16,9 +16,11 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.getProductDetails = (req, res, next) => {
-  res.render("shop/product-details", {
-    pageTitle: "K-Shop | Product Details",
-    productId: req.params.productId,
+  Product.getById(req.params.productId, (singleProduct) => {
+    res.render("shop/product-details", {
+      pageTitle: "K-Shop | Product Details",
+      product: singleProduct,
+    });
   });
 };
 

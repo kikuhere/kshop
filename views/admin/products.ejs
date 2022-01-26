@@ -1,13 +1,13 @@
 <%- include("../includes/main.ejs") %>
 <div class="section">
     <div class="container is-max-desktop">
-        <h1 class="title has-text-info">Admin Store Page</h1>
+        <h1 class="title has-text-info">Store Page</h1>
         <p class="subtitle">Here, We can find all products in our store.</p>
     </div>
 
     <% if(allProducts.length > 0) { %>
     <div class="container mt-5 is-max-desktop">
-        <h1 class="title">All Products</h1>
+        <h1 class="title">All Admin Products</h1>
         <div class="columns is-multiline">
             <% allProducts.forEach(product => { %>
             <div class="column is-3">
@@ -17,13 +17,13 @@
                     </div>
                     <div class="card-content">
                         <h1 class="title is-4"><%= product.title %></h1>
-                        <p class="subtitle is-6"><%= product.description %></p>
+                        <p class="subtitle is-6"><%= product.description.substr(0,50) %></p>
                         <h2 class="title is-4 has-text-info">₹ <%= product.price %></h2>
                     </div>
                     <div class="card-footer">
-                        <a href="/edit-product/" class="card-footer-item">Edit</a>
-                        <form action="/admin/delete-product/" method="POST" class="form">
-                            <button type="submit" class="card-footer-item button is-white">Delete</button>
+                        <a href="/admin/editproduct/<%= product.id %>" class="card-footer-item">Edit</a>
+                        <form action="/add-to-cart/" method="POST" class="form">
+                            <button type="submit" class="button is-white card-footer-item">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
     <% } else {%>
     <div class="container is-max-desktop">
         <h1 class="title">No Products found. Try adding one</h1>
-        <a href="/admin/addproduct" class="button:href">Add Product</a>
+        <a href="/admin/addproduct" class="button">Add Product</a>
     </div>
     <% } %>
 </div>

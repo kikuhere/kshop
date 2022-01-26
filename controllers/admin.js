@@ -22,7 +22,29 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.getEditProduct = (req, res, next) => {
-  res.render("admin/edit-product", { pageTitle: "K-Shop | Edit a Product" });
+  Product.getById(req.params.productId, (singleProduct) => {
+    res.render("admin/edit-product", {
+      pageTitle: "K-Shop | Edit a Product",
+      product: singleProduct,
+    });
+  });
+};
+
+exports.postEditProduct = (req, res, next) => {
+  const title = req.body.title;
+  const imageUrl = req.body.imageUrl;
+  const price = req.body.price;
+  const description = req.body.description;
+  if (
+    (title !== "") &
+    (imageUrl !== "") &
+    (price !== "") &
+    (description !== "")
+  ) {
+    const product = new Product(title, imageUrl, price, description);
+    product.save();
+  }
+  res.redirect("/store");
 };
 
 exports.getAdminProducts = (req, res, next) => {
