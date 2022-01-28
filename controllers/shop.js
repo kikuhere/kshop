@@ -24,6 +24,11 @@ exports.getProductDetails = (req, res, next) => {
   });
 };
 
+exports.postAddToCart = (req, res, next) => {
+  console.log(`${req.params.productId} has been added to cart`);
+  res.redirect("/cart");
+};
+
 exports.getCheckout = (req, res, next) => {
   res.render("shop/checkout", {
     pageTitle: "K-Shop | Checkout",

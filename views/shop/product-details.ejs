@@ -7,6 +7,6 @@
         </figure>
         <h1 class=" title is-info">₹ <%= product.price %></h1>
         <p><%= product.description %></p>
-        <button class="button is-info">Add to Cart</button>
+        <%- include("../includes/add-to-cart.ejs", {product: product}) %>
     </div>
 </div>
