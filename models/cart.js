@@ -4,7 +4,7 @@ const path = require("path");
 const filePath = path.join(
   path.dirname(process.mainModule.filename),
   "data",
-  "products.json"
+  "cart.json"
 );
 
 //   Creating and exporting ** Cart ** Model Class
@@ -26,16 +26,16 @@ module.exports = class Cart {
       // Analyzing the cart.. if user ads the same product again we need to incriment the price and qnty
       let updatedProduct;
       if (existingProduct) {
-        (updatedProduct = [...existingProduct]), //taking existing product to the updated product variable
-          (updatedProduct.qnty = existingProduct.qnty + 1); // increasing the quantity
-        cart.products = [...updatedProduct]; // replacing the products in the cart with the latest updated proeduct
+        updatedProduct = { ...existingProduct }; //taking existing product to the updated product variable
+        updatedProduct.qnty = updatedProduct.qnty + 1; // increasing the quantity
+        cart.products = [...cart.products]; // replacing the products in the cart with the latest updated proeduct
         cart.products[existingProductIndex] = updatedProduct; // replacing the existing product with updated product
       } else {
         updatedProduct = { id: id, qnty: 1 };
         cart.products = [...cart.products, updatedProduct]; // adding new product to the cart
       }
       cart.totalPrice = cart.totalPrice + +productPrice;
-      fs.writeFile(filePath, (err) => {
+      fs.writeFile(filePath, JSON.stringify(cart), (err) => {
         console.log(err);
       });
     });
