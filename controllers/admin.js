@@ -18,33 +18,49 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getAddProduct = (req, res, next) => {
-  res.render("admin/add_product", { pageTitle: "K-Shop | Add a Product" });
-};
-
-exports.getEditProduct = (req, res, next) => {
-  Product.getById(req.params.productId, (singleProduct) => {
-    res.render("admin/edit-product", {
-      pageTitle: "K-Shop | Edit a Product",
-      product: singleProduct,
-    });
+  res.render("admin/edit-product", {
+    pageTitle: "K-Shop | Add a Product",
+    editing: false,
   });
 };
 
-exports.postEditProduct = (req, res, next) => {
-  const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
-  const description = req.body.description;
-  if (
-    (title !== "") &
-    (imageUrl !== "") &
-    (price !== "") &
-    (description !== "")
-  ) {
-    const product = new Product(title, imageUrl, price, description);
-    product.save();
+exports.getEditProduct = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect("/");
+  } else {
+    Product.getById(req.params.productId, (singleProduct) => {
+      res.render("admin/edit-product", {
+        pageTitle: "K-Shop | Edit a Product",
+        editing: editMode,
+        product: singleProduct,
+      });
+    });
   }
-  res.redirect("/store");
+};
+
+exports.postEditProduct = (req, res, next) => {
+  const updatedId = req.body.productId;
+  const updatedTitle = req.body.title;
+  const updatedImageUrl = req.body.imageUrl;
+  const updatedPrice = req.body.price;
+  const updatedDescription = req.body.description;
+  if (
+    (updatedTitle !== "") &
+    (updatedImageUrl !== "") &
+    (updatedPrice !== "") &
+    (updatedDescription !== "")
+  ) {
+    const updatedProduct = new Product(
+      updatedId,
+      updatedTitle,
+      updatedImageUrl,
+      updatedPrice,
+      updatedDescription
+    );
+    updatedProduct.save();
+    res.redirect("/admin/products");
+  }
 };
 
 exports.getAdminProducts = (req, res, next) => {
