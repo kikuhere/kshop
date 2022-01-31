@@ -61,4 +61,16 @@ module.exports = class Product {
       cb(product);
     });
   }
+
+  // Delete a product
+  static deleteById(productId) {
+    getProductsFromFile((products) => {
+      const updatedProducts = products.filter((prod) => prod.id !== productId);
+      fs.writeFile(filePath, JSON.stringify(updatedProducts), (err) => {
+        console.log(
+          `error while writing to file in deleteById function - ${err}`
+        );
+      });
+    });
+  }
 };

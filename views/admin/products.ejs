@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-footer">
                         <a href="/admin/editproduct/<%= product.id %>?edit=true" class="card-footer-item">Edit</a>
-                        <form action="/add-to-cart/" method="POST" class="form">
+                        <form action="/admin/deleteproduct/<%= product.id %>" method="POST" class="form">
                             <button type="submit" class="button is-white card-footer-item">Delete</button>
                         </form>
                     </div>
