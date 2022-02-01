@@ -11,8 +11,11 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  res.render("shop/cart", {
-    pageTitle: "K-Shop | Cart",
+  Cart.getCart((cart) => {
+    res.render("shop/cart", {
+      pageTitle: "K-Shop | Cart",
+      cart: cart,
+    });
   });
 };
 

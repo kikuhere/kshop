@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 
 exports.postAddProduct = (req, res, next) => {
+  const id = null;
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
@@ -11,7 +12,7 @@ exports.postAddProduct = (req, res, next) => {
     (price !== "") &
     (description !== "")
   ) {
-    const product = new Product(title, imageUrl, price, description);
+    const product = new Product(id, title, imageUrl, price, description);
     product.save();
   }
   res.redirect("/store");
