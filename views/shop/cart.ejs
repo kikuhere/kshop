@@ -1,8 +1,24 @@
 <%- include("../includes/main.ejs") %>
-
-<h1>Cart</h1>
-<% cart.products.forEach(product =>{ %>
-<p>Product Id : <%= product.id %></p>
-<p>Qnty : <%= product.qnty %></p>
-<hr>
-<% }) %>
+<div class="section">
+    <div class="container is-max-desktop">
+        <h1 class="title has-text-info">Your Cart</h1>
+        <% if(products.length > 0){ %>
+        <table class="table">
+            <tr>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Quantity</th>
+            </tr>
+            <% products.forEach(product => { %>
+            <tr>
+                <td><%= product.productDetails.title %></td>
+                <td><%= product.productDetails.price %></td>
+                <td><%= product.qnty %></td>
+            </tr>
+        </table>
+        <% }) %>
+        <hr>
+        <h3 class="title is-4">Your Total Price is ₹<%= cart.totalPrice %>/-</h3>
+        <% } %>
+    </div>
+</div>
