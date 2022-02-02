@@ -51,6 +51,14 @@ exports.postAddToCart = (req, res, next) => {
   res.redirect("/cart");
 };
 
+exports.postRemoveFromCart = (req, res, next) => {
+  const prodId = req.params.productId;
+  Product.getById(prodId, (product) => {
+    Cart.deleteProduct(prodId, product.price);
+  });
+  res.redirect("/cart");
+};
+
 exports.getCheckout = (req, res, next) => {
   res.render("shop/checkout", {
     pageTitle: "K-Shop | Checkout",
