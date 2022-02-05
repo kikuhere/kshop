@@ -2,12 +2,14 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("shop/product-list", {
-      allProducts: products,
-      pageTitle: "K-Shop | Store",
-    });
-  });
+  Product.fetchAll()
+    .then(([products, fieldsData]) => {
+      res.render("shop/product-list", {
+        allProducts: products,
+        pageTitle: "K-Shop | Store",
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getCart = (req, res, next) => {
@@ -35,12 +37,14 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.getProductDetails = (req, res, next) => {
-  Product.getById(req.params.productId, (singleProduct) => {
-    res.render("shop/product-details", {
-      pageTitle: "K-Shop | Product Details",
-      product: singleProduct,
-    });
-  });
+  Product.getById(req.params.productId)
+    .then(([product, fieldsData]) => {
+      res.render("shop/product-details", {
+        pageTitle: "K-Shop | Product Details",
+        product: product[0],
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.postAddToCart = (req, res, next) => {

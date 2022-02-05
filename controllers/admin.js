@@ -13,9 +13,13 @@ exports.postAddProduct = (req, res, next) => {
     (description !== "")
   ) {
     const product = new Product(id, title, imageUrl, price, description);
-    product.save();
+    product
+      .save()
+      .then(() => {
+        res.redirect("/store");
+      })
+      .catch((err) => console.log(err));
   }
-  res.redirect("/store");
 };
 
 exports.getAddProduct = (req, res, next) => {
@@ -71,10 +75,12 @@ exports.postDeleteProduct = (req, res, next) => {
 };
 
 exports.getAdminProducts = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("admin/products", {
-      allProducts: products,
-      pageTitle: "K-Shop | Admin Products",
-    });
-  });
+  Product.fetchAll()
+    .then(([products]) => {
+      res.render("admin/products", {
+        allProducts: products,
+        pageTitle: "K-Shop | Admin Products",
+      });
+    })
+    .catch((err) => console.log(err));
 };

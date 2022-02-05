@@ -12,12 +12,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("shop/index", {
-      pageTitle: "K-Shop | Your Shopping Destination",
-      products: products,
-    });
-  });
+  Product.fetchAll()
+    .then(([products, fieldsData]) => {
+      res.render("shop/index", {
+        pageTitle: "K-Shop | Your Shopping Destination",
+        products: products,
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 // getting all admin related routes
