@@ -1,36 +1,29 @@
-const db = require("../database");
-const Cart = require("./cart");
+const Sequelize = require("sequelize");
+const sequelize = require("../database");
 
-// Creating and Exporting Product model
-module.exports = class Product {
-  constructor(id, title, imageUrl, price, description) {
-    this.id = id;
-    this.title = title;
-    this.imageUrl = imageUrl;
-    this.price = price;
-    this.description = description;
-  }
+const Product = sequelize.define("product", {
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  title: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+  imgUrl: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+  price: {
+    type: Sequelize.DOUBLE,
+    allowNull: false,
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+});
 
-  // Saving product model to a file
-  save() {
-    return db.execute(
-      "INSERT INTO products (title, price, description, imageUrl) VALUES (?, ?, ?, ?)",
-      [this.title, this.price, this.description, this.imageUrl]
-    );
-  }
-
-  // Getting all products in the database
-  static fetchAll() {
-    return db.execute("SELECT * FROM products ORDER BY -id");
-  }
-
-  // Get a Single product
-  static getById(id) {
-    return db.execute("SELECT * FROM products WHERE id = ?", [id]);
-  }
-
-  // Delete a product
-  static deleteById(productId) {
-    return db.execute("DELETE FROM products WHERE id = ?", [productId]);
-  }
-};
+module.exports = Product;
