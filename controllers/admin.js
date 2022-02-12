@@ -12,10 +12,14 @@ exports.postAddProduct = (req, res, next) => {
     (price !== "") &
     (description !== "")
   ) {
-    const product = new Product(id, title, imageUrl, price, description);
-    product
-      .save()
-      .then(() => {
+    Product.create({
+      title: title,
+      imgUrl: imageUrl,
+      price: price,
+      description: description,
+    })
+      .then((result) => {
+        console.log("product added");
         res.redirect("/store");
       })
       .catch((err) => console.log(err));
@@ -34,13 +38,15 @@ exports.getEditProduct = (req, res, next) => {
   if (!editMode) {
     return res.redirect("/");
   } else {
-    Product.getById(req.params.productId, (singleProduct) => {
-      res.render("admin/edit-product", {
-        pageTitle: "K-Shop | Edit a Product",
-        editing: editMode,
-        product: singleProduct,
-      });
-    });
+    Product.findByPk(req.params.productId)
+      .then((product) => {
+        res.render("admin/edit-product", {
+          pageTitle: "K-Shop | Edit a Product",
+          editing: editMode,
+          product: product,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 };
 
@@ -56,27 +62,35 @@ exports.postEditProduct = (req, res, next) => {
     (updatedPrice !== "") &
     (updatedDescription !== "")
   ) {
-    const updatedProduct = new Product(
-      updatedId,
-      updatedTitle,
-      updatedImageUrl,
-      updatedPrice,
-      updatedDescription
-    );
-    updatedProduct.save();
-    res.redirect("/admin/products");
+    Product.findByPk(updatedId)
+      .then((product) => {
+        product.title = updatedTitle;
+        product.imgUrl = updatedImageUrl;
+        product.price = updatedPrice;
+        product.description = updatedDescription;
+        return product.save();
+      })
+      .then((result) => {
+        res.redirect("/admin/products");
+      })
+      .catch((err) => console.log(err));
   }
 };
 
 exports.postDeleteProduct = (req, res, next) => {
-  const productId = req.params.productId;
-  Product.deleteById(productId);
-  res.redirect("/admin/products");
+  Product.findByPk(req.params.productId)
+    .then((product) => {
+      return product.destroy();
+    })
+    .then((response) => {
+      res.redirect("/admin/products");
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getAdminProducts = (req, res, next) => {
-  Product.fetchAll()
-    .then(([products]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("admin/products", {
         allProducts: products,
         pageTitle: "K-Shop | Admin Products",

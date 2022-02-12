@@ -2,8 +2,8 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
-    .then(([products, fieldsData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("shop/product-list", {
         allProducts: products,
         pageTitle: "K-Shop | Store",
@@ -37,14 +37,23 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.getProductDetails = (req, res, next) => {
-  Product.getById(req.params.productId)
-    .then(([product, fieldsData]) => {
+  Product.findByPk(req.params.productId)
+    .then((product) => {
       res.render("shop/product-details", {
         pageTitle: "K-Shop | Product Details",
-        product: product[0],
+        product: product,
       });
     })
     .catch((err) => console.log(err));
+
+  // Product.findAll({ where: { id: req.params.productId } })
+  //   .then((product) => {
+  //     res.render("shop/product-details", {
+  //       pageTitle: "K-Shop | Product Details",
+  //       product: product[0],
+  //     });
+  //   })
+  //   .catch((err) => console.log(err));
 };
 
 exports.postAddToCart = (req, res, next) => {

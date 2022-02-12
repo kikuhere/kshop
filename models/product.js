@@ -9,11 +9,11 @@ const Product = sequelize.define("product", {
     autoIncrement: true,
   },
   title: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   imgUrl: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   price: {
@@ -21,7 +21,7 @@ const Product = sequelize.define("product", {
     allowNull: false,
   },
   description: {
-    type: Sequelize.TEXT,
+    type: Sequelize.STRING,
     allowNull: false,
   },
 });

@@ -6,14 +6,15 @@ const adminRoutes = require("./routes/admin.js");
 const shopRoutes = require("./routes/shop.js");
 const pageNotFound = require("./controllers/404");
 const Product = require("./models/product");
+const sequelize = require("./database");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res, next) => {
-  Product.fetchAll()
-    .then(([products, fieldsData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("shop/index", {
         pageTitle: "K-Shop | Your Shopping Destination",
         products: products,
@@ -31,6 +32,14 @@ app.use(shopRoutes);
 // getting 404 route from controller
 app.use(pageNotFound.get404);
 
-app.listen(3000, () => {
-  console.log("server started at 3000");
-});
+sequelize
+  .sync()
+  .then((response) => {
+    // console.log(response);
+    app.listen(3000, () => {
+      console.log("server started at 3000");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
