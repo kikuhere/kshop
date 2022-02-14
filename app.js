@@ -6,6 +6,7 @@ const adminRoutes = require("./routes/admin.js");
 const shopRoutes = require("./routes/shop.js");
 const pageNotFound = require("./controllers/404");
 const Product = require("./models/product");
+const User = require("./models/user");
 const sequelize = require("./database");
 
 app.set("view engine", "ejs");
@@ -32,8 +33,11 @@ app.use(shopRoutes);
 // getting 404 route from controller
 app.use(pageNotFound.get404);
 
+Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+User.hasMany(Product);
+
 sequelize
-  .sync()
+  .sync({ force: true })
   .then((response) => {
     // console.log(response);
     app.listen(3000, () => {
