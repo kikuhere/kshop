@@ -12,12 +12,12 @@
             </tr>
             <% products.forEach(product => { %>
             <tr>
-                <td><%= product.productDetails.title %></td>
-                <td><%= product.productDetails.price %></td>
-                <td><%= product.qnty %></td>
+                <td><%= product.title %></td>
+                <!-- <td><%= product.price %></td> -->
+                <td><%= product.quantity %></td>
                 <td>
-                    <form action="/removefromcart/<%= product.productDetails.id %>" class="form" method="POST">
-                        <!-- <input type="hidden" name="productId" value="<%= product.productDetails.id %>"> -->
+                    <form action="/removefromcart/<%= product.id %>" class="form" method="POST">
+
                         <button class="button" type="submit">Delete</button>
                     </form>
                 </td>
@@ -25,7 +25,8 @@
             <% }) %>
         </table>
         <hr>
-        <h3 class="title is-4">Your Total Price is ₹<%= cart.totalPrice %>/-</h3>
+        <% } else{ %>
+        <h1>No products in cart</h1>
         <% } %>
     </div>
 </div>
