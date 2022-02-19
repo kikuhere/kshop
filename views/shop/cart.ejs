@@ -13,8 +13,8 @@
             <% products.forEach(product => { %>
             <tr>
                 <td><%= product.title %></td>
-                <!-- <td><%= product.price %></td> -->
-                <td><%= product.quantity %></td>
+                <td><%= product.price %></td>
+                <td><%= product.cartItem.quantity %></td>
                 <td>
                     <form action="/removefromcart/<%= product.id %>" class="form" method="POST">
 

@@ -66,8 +66,8 @@ sequelize
     return user;
   })
   .then((user) => {
-    user.getCart((cart) => {
-      if (!cart) {
+    return user.getCart().then((cart) => {
+      if (!cart.length > 0) {
         return user.createCart();
       }
     });
