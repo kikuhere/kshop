@@ -2,7 +2,12 @@
 .active {
   background-color: #485fc7 !important;
 }
-.image img{
-  width:530px;
+.image img {
+  width: 530px;
   height: auto;
+}
+
+.card-image {
+  overflow: hidden;
+  max-height: 220px;
 }
