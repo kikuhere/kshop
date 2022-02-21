@@ -115,8 +115,20 @@ exports.createOrder = (req, res, next) => {
     .then((cart) => {
       return cart.getProducts();
     })
-    .then(products=>{
-      
+    .then((products) => {
+      const orders = products.map((product) => {
+        product.orderItem = { quantity: product.cartItem.quantity };
+        return product;
+      });
+      return req.user
+        .createOrder()
+        .then((order) => {
+          return order.addProducts(orders);
+        })
+        .then((result) => {
+          res.redirect("/orders");
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
 };
