@@ -1,3 +1,33 @@
 <%- include("../includes/main.ejs") %>
+<div class="section">
+    <div class="container is-max-desktop">
+        <h1 class="title has-text-info">Your Orders</h1>
+        <% if(orders.length > 0){ %>
+        <table class="table">
+            <tr>
+                <th>Order No.</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Quantity</th>
+            </tr>
+            <% orders.forEach(order => { %>
+            <tr>
+                <td><%= order.id %></td>
+                <% order.products.forEach(product => { %>
+                <td><%= product.title %></td>
+                <td><%= product.price %></td>
+                <td><%= product.orderItem.quantity %></td>
+            </tr>
+            <% }) %>
 
-<h1>Orders</h1>
+            <% }) %>
+        </table>
+        <form action="/createorder" method="POST">
+            <button type="submit" class="button">Checkout</button>
+        </form>
+        <hr>
+        <% } else{ %>
+        <h1>You didn't order any products yet </h1>
+        <% } %>
+    </div>
+</div>
